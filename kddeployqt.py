@@ -24,8 +24,8 @@ parser.add_argument('--qml', default='qml', help='The path to the application qm
 
 parser.add_argument('--qml_root_path', action='append', default=[], help='The root path of the qml files. Can be used multiple times')
 parser.add_argument('--qml_import_path', action='append', default=[], help='The import path of the qml files. Can be used multiple times')
-parser.add_argument('--extra-libs', action='append', default=[], help='Additional libs (use qualified name, e.g. libQt6WaylandClient.so.6 ). Can be used multiple times')
-parser.add_argument('--extra-plugins', action='append', default=[], help='Additional plugins. Can be used multiple times')
+parser.add_argument('--extra_libs', action='append', default=[], help='Additional libs (use qualified name, e.g. libQt6WaylandClient.so.6 ). Can be used multiple times')
+parser.add_argument('--extra_plugins', action='append', default=[], help='Additional plugins. Can be used multiple times')
 parser.add_argument('--system_libs_path', action='append', default=[], help='The system libs path where to search system libs. Can be used multiple times')
 parser.add_argument('--wayland', action='store_true', help='Add wayland support')
 parser.add_argument('--xcb', action='store_true', help='Add XCB/Xorg/X11 support')
@@ -105,6 +105,34 @@ plugins = {
             'Qt6WaylandCompositor': ['wayland-graphics-integration-server', 'wayland-hardware-layer-integration'],
             'Qt6WebView': ['webview'],
             'Qt6Widgets': ['styles'],
+
+            'can': ['can'],
+            'Qt53DInput': ['3dinputdevices'],
+            'Qt53DRender': ['sceneparsers', 'geometryloaders', 'renderplugins', 'renderers'],
+            'Qt5Core': ['platforms'],
+            'Qt5Gamepad': ['gamepads'],
+            'Qt5EglFSDeviceIntegration': ['egldeviceintegrations'],
+            'Qt5Gui': ['accessiblebridge', 'platforms', 'xcbglintegrations', 'platformthemes', 'platforminputcontexts', 'generic', 'iconengines', 'imageformats', 'egldeviceintegrations'],
+            'Qt5Location': ['geoservices'],
+            'Qt5Multimedia': ['mediaservice', 'audio', 'video', 'playlistformats', 'resourcepolicy'],
+            'Qt5Network': ['bearer'],
+            'Qt5OpcUa': ['opcua'],
+            'Qt5Positioning': ['position'],
+            'Qt5PrintSupport': ['printsupport'],
+            'Qt5Qml': ['qmltooling'],
+            'Qt5Quick': ['scenegraph'],
+            'Qt5Sensors':['sensors', 'sensorgestures'],
+            'Qt5SerialBus': ['canbus'],
+            'Qt5Sql': ['sqldrivers'],
+            'Qt5TextToSpeech': ['texttospeech'],
+            'Qt5UiTools': ['designer'],
+            'Qt5VirtualKeyboard': ['virtualkeyboard'],
+            'Qt5WaylandClient': ['wayland-decoration-client', 'wayland-inputdevice-integration', 'wayland-shell-integration'],
+            'Qt5WaylandCompositor': ['wayland-graphics-integration-server', 'wayland-hardware-layer-integration'],
+            'Qt5WebView': ['webview'],
+            'Qt5Widgets': ['styles'],
+
+
            }
 parsed_dependencies = []
 
@@ -122,6 +150,9 @@ for line in lines:
         host_bins = line.split(':')[1]
     if 'QT_HOST_LIBEXECS' in line:
         host_libexecs = line.split(':')[1]
+
+try: host_libexecs
+except NameError: host_libexecs = host_bins
 
 executables = [args.executable]
 
