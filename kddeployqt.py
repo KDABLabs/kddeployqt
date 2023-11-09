@@ -77,7 +77,7 @@ if not os.path.isfile(os.path.join(args.output, args.bin, os.path.basename(args.
     shutil.copy(args.executable, os.path.join(args.output, args.bin))
 
 # plugins dictionary
-# usesful until we can get the plugins info from libs folder as we do on android
+# useful until we can get the plugins info from libs folder as we do on android
 plugins = {
             'Qt63DInput': ['3dinputdevices'],
             'Qt63DRender': ['sceneparsers', 'geometryloaders', 'renderplugins', 'renderers'],
