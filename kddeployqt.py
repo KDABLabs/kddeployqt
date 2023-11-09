@@ -28,6 +28,7 @@ parser.add_argument('--extra-libs', action='append', default=[], help='Additiona
 parser.add_argument('--extra-plugins', action='append', default=[], help='Additional plugins. Can be used multiple times')
 parser.add_argument('--system_libs_path', action='append', default=[], help='The system libs path where to search system libs. Can be used multiple times')
 parser.add_argument('--wayland', action='store_true', help='Add wayland support')
+parser.add_argument('--xcb', action='store_true', help='Add XCB/Xorg/X11 support')
 parser.add_argument('--verbose', action='store_true', help='Print verbose output')
 
 args = parser.parse_args()
@@ -128,6 +129,9 @@ if args.wayland:
     args.extra_plugins.append('wayland-decoration-client')
     args.extra_plugins.append('wayland-graphics-integration-client')
     args.extra_plugins.append('wayland-shell-integration')
+
+if args.xcb:
+    args.extra_plugins.append('xcbglintegrations')
 
 def find_relative_path(path):
     for root in args.qml_root_path:
